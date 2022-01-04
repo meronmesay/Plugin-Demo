@@ -6,3 +6,5 @@ Description:
 Author:
 Author URI:
 Version:
+*/
+?>
