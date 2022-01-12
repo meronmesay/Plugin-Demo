@@ -25,4 +25,45 @@ them if you wish), that you receive source code or can get it if you
 want it, that you can change the software or use pieces of it in new
 free programs, and that you know you can do these things.
 */
+
+defined('ABSPATH') or die("The plugin is not working.");
+
+class MadeFreePlugin
+{
+    function activate(){
+
+    }
+    function deactivate(){
+
+    }
+    function uninstall(){
+
+    }
+}
+
+if (class_exists('MadeFreePlugin')){
+    $madeFreePlugin= new MadeFreePlugin();
+}
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
