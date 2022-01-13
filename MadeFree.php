@@ -2,10 +2,15 @@
 /*
 Plugin Name: MadeFree
 Plugin URI: http://MadeFree.com/plugin
-Description:This is a plugin which will help you to build a contact form
+Description:This is a plugin which will help you to build a contact form and many more. Get started now!
 Author: Meron Mesay
 Author URI: http://meronmesay.wordpress.com
 Version: 1.0.0
+Requires at least: 5.2
+Requires PHP: 7.2
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: my-basics-plugin
 */
 
 /*
@@ -28,25 +33,64 @@ free programs, and that you know you can do these things.
 
 defined('ABSPATH') or die("The plugin is not working.");
 
-class MadeFreePlugin
+function made_free()
 {
-    function activate(){
 
-    }
-    function deactivate(){
 
-    }
-    function uninstall(){
 
-    }
+
+    include_once plugin_dir_path(__FILE__) .'./includes/contact.php';
+
+
+
+
 }
 
-if (class_exists('MadeFreePlugin')){
-    $madeFreePlugin= new MadeFreePlugin();
+// add shortcut 
+add_shortcode('M_cont_fo', 'made_free');
+
+function add_menu()
+{
+
+    add_menu_page(
+        'Simple Form',
+        'Simple Form',
+        'manage_options',
+        'contact-form',
+        'displayCode',
+        'dashicons-feedback'
+    );
+
 }
-//
+add_action('admin_menu', 'add_menu');
+
+// Enqueue style 
+function enqueue() {
+
+    wp_enqueue_style( 'myCSS', plugin_dir_url(__FILE__) .'assets/css/style1.css');
+    wp_enqueue_script( 'my_custom_script', plugin_dir_url( __FILE__ ) . 'assets/js/script.js' );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'enqueue' );
 
 
+function example_form_capture(){
+
+  if(isset($_POST['example_form_submit']))
+  {
+    $Fname= sanitize_text_field($_POST['your_Fname']);
+    $Lname= sanitize_text_field($_POST['your_Lname']);
+    $email= sanitize_text_field($_POST['your_email']);
+    $comments= sanitize_textarea_field($_POST['your_comments']);
+
+    $to='it.kevin.shitaye@gmail.com';
+    $subject='Test form submission';
+    $message='' .$Fname.' - ' .$Lname.' -  '.$email.' - '.$comments;
+    wp_mail($to,$subject,$message);
+  }
+}
+add_action('wp_head','example_form_capture');
 
 
 
