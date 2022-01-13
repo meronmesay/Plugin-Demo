@@ -36,33 +36,27 @@ defined('ABSPATH') or die("The plugin is not working.");
 function made_free()
 {
 
-
-
-
-    include_once plugin_dir_path(__FILE__) .'./includes/contact.php';
-
-
-
-
+  include_once plugin_dir_path(__FILE__) .'./includes/contact.php';
 }
 
 // add shortcut 
 add_shortcode('M_cont_fo', 'made_free');
 
-function add_menu()
+function madefree_setting_menu()
 {
 
     add_menu_page(
-        'Simple Form',
-        'Simple Form',
-        'manage_options',
-        'contact-form',
-        'displayCode',
-        'dashicons-feedback'
+      __( 'MadeFree Settings', 'madefree-plugin' ),
+      __( 'MadeFree Settings', 'madefree-plugin' ),
+      'manage_options',
+      'madefree-settings-page',
+      'madefree_settings_template_callback',
+      '',
+      null
     );
 
 }
-add_action('admin_menu', 'add_menu');
+add_action('admin_menu', 'madefree_setting_menu');
 
 // Enqueue style 
 function enqueue() {
