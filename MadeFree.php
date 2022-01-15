@@ -57,34 +57,28 @@ function madefree_setting_menu()
 
 }
 add_action('admin_menu', 'madefree_setting_menu');
+function madefree_settings_template_callback()
+{
+  ?>
+  <div class="wrap">
+      <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
-// Enqueue style 
-function enqueue() {
+      <form action="options.php" method="post">
+          <?php 
+              // security field
+              settings_fields( 'madefree-settings-page' );
 
-    wp_enqueue_style( 'myCSS', plugin_dir_url(__FILE__) .'assets/css/style1.css');
-    wp_enqueue_script( 'my_custom_script', plugin_dir_url( __FILE__ ) . 'assets/js/script.js' );
+              // output settings section here
+              do_settings_sections('madefree-settings-page');
 
+              // save settings button
+              submit_button( 'Save Settings' );
+          ?>
+      </form>
+  </div
+<?php
 }
 
-add_action( 'wp_enqueue_scripts', 'enqueue' );
-
-
-function example_form_capture(){
-
-  if(isset($_POST['example_form_submit']))
-  {
-    $Fname= sanitize_text_field($_POST['your_Fname']);
-    $Lname= sanitize_text_field($_POST['your_Lname']);
-    $email= sanitize_text_field($_POST['your_email']);
-    $comments= sanitize_textarea_field($_POST['your_comments']);
-
-    $to='it.kevin.shitaye@gmail.com';
-    $subject='Test form submission';
-    $message='' .$Fname.' - ' .$Lname.' -  '.$email.' - '.$comments;
-    wp_mail($to,$subject,$message);
-  }
-}
-add_action('wp_head','example_form_capture');
 
 
 
