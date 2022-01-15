@@ -79,7 +79,22 @@ function madefree_settings_template_callback()
 <?php
 }
 
+// Setting template
 
+function madefree_settings_init(){
+  // Setup settings section
+  add_settings_section(
+    'madefree_settings_section',
+    'MadeFree Settings Page',
+    '',
+    'madefree-settings-page'
+);
+  add_settings_section(
+  'madefree_settings_section',
+  'M_cont_fo',
+  '',
+  'madefree-settings-page'
+);
 
 
 
