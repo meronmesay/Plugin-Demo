@@ -95,8 +95,35 @@ function madefree_settings_init(){
   '',
   'madefree-settings-page'
 );
+// Register bg color
+register_setting(
+  'madefree-settings-page',
+  'madefree_settings_bg_color_field',
+  array(
+      'type' => 'string',
+      'sanitize_callback' => 'sanitize_text_field',
+      'default' => '#FFFFFF'
+  )
+);
 
-
+// backgroung color
+add_settings_field(
+'madefree_settings_bg_color_field',
+__( 'Backgroung Color', 'madefree' ),
+'madefree_settings_bg_color_callback',
+'madefree-settings-page',
+'madefree_settings_section'
+);
+// Register btn size input
+register_setting(
+  'madefree-settings-page',
+  'madefree_settings_btn_size_field',
+  array(
+      'type' => 'string',
+      'sanitize_callback' => 'sanitize_text_field',
+      'default' => 'btn-small'
+  )
+);
 
 
 
