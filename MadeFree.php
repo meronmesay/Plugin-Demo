@@ -124,6 +124,25 @@ register_setting(
       'default' => 'btn-small'
   )
 );
+// btn color
+add_settings_field(
+  'madefree_settings_btn_color_field',
+  __( 'Submit button Color', 'madefree' ),
+  'madefree_settings_btn_color_callback',
+  'madefree-settings-page',
+  'madefree_settings_section'
+);
+
+// Registe btn color input
+register_setting(
+    'madefree-settings-page',
+    'madefree_settings_btn_color_field',
+    array(
+        'type' => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default' => '#2271b1'
+    )
+);
 
 
 
