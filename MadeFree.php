@@ -143,7 +143,17 @@ register_setting(
         'default' => '#2271b1'
     )
 );
+ // backgroung color
+ add_settings_field(
+  'madefree_settings_redirect_field',
+  __( 'Redirect URL', 'madefree' ),
+  'madefree_settings_redirect_callback',
+  'madefree-settings-page',
+  'madefree_settings_section'
+);
 
+
+}
 
 
 
