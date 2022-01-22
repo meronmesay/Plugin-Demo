@@ -173,7 +173,22 @@ function madefree_settings_btn_size_callback() {
   </select>
   <?php 
 }
+function madefree_settings_bg_color_callback(){
+  $madefree_bg_color = get_option('madefree_settings_bg_color_field');
+  ?>
+  <input type="color" name="madefree_settings_bg_color_field"  value="<?php echo isset($madefree_bg_color) ? esc_attr( $madefree_bg_color ) : ''; ?>" />
+  <br>
+  <hr>
+  <?php 
+}
 
+function madefree_settings_redirect_callback(){
+  $madefree_redirect = get_option('madefree_settings_redirect_field');
+  ?>
+  <input type="text" name="madefree_settings_redirect_field"  value="<?php echo isset($madefree_redirect) ? esc_attr( $madefree_redirect ) : ''; ?>" />
+
+  <?php 
+}
 
 
 
