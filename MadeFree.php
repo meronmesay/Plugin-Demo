@@ -154,9 +154,25 @@ register_setting(
 
 
 }
+add_action( 'admin_init', 'madefree_settings_init' );
 
+function madefree_settings_btn_color_callback(){
+  $madefree_btn_color = get_option('madefree_settings_btn_color_field');
+  ?>
+  <input type="color" name="madefree_settings_btn_color_field"  value="<?php echo isset($madefree_btn_color) ? esc_attr( $madefree_btn_color ) : ''; ?>" />
+  <?php 
+}
 
-
+function madefree_settings_btn_size_callback() {
+  $madefree_btn_size = get_option('madefree_settings_btn_size_field');
+  ?>
+  <select name="madefree_settings_btn_size_field" class="regular-text">
+        <option value="btn-small" <?php selected( 'btn-small', $madefree_btn_size ); ?> >Small</option>
+        <option value="btn-mid" <?php selected( 'btn-mid', $madefree_btn_size ); ?> >Medium</option>
+        <option value="btn-larg" <?php selected( 'btn-larg', $madefree_btn_size ); ?>>Large</option>
+  </select>
+  <?php 
+}
 
 
 
