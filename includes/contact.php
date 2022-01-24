@@ -7,10 +7,24 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
 </head>
 <body>
+<div hidden>
+		<?php 
+			// Background color
+			$madefree_bg_color = get_option('madefree_settings_bg_color_field');
+			// button size 
+			$madefree_btn_size = get_option('madefree_settings_btn_size_field'); 
+			// button color
+			$madefree_btn_color = get_option('madefree_settings_btn_color_field');
+			// redirect url
+			$madefree_redirect = get_option('madefree_settings_redirect_field');
+		
+		?>
+		
+	</div>
 	<div class="container">
 		<div class="contact-box">
 			<div class="left"></div>
-			<div class="right">
+			<div class="right" >
 				<h2>Contact Us</h2>
                 <form method="post" action="">
 				<label class="label" for="your_Fname">FirstName</label>
@@ -21,7 +35,7 @@
                 <input type="text" class="field" name="your_email" placeholder="Your email"/>
 				<label class="label"  for="your_comments">Comments</label>
                 <textarea placeholder="Message"  name="your_comments" class="form-control"></textarea>
-				<input class="btn" type="submit" value="Send your information" name="example_form_submit" />
+				<input style="background-color: <?php echo isset($madefree_btn_color) ? esc_attr( $madefree_btn_color ) : ''; ?>;" class="btn <?php echo isset($madefree_btn_size) ? esc_attr( $madefree_btn_size ) : ''; ?>" type="submit" value="Send your information" name="example_form_submit" />
                 </form>
 			</div>
 		</div>
