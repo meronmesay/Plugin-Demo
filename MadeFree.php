@@ -55,17 +55,11 @@ function madefree_setting_menu()
 
     );
 
-    add_action( 'admin_head-'.$hook, 'devo_image_uplaoder_assets', 10, 1 );
-
+    
 }
 
 add_action('admin_menu', 'madefree_setting_menu');
 
-function myplugin_image_uplaoder_assets() {
-  wp_enqueue_media();
-  wp_enqueue_style( 'devo-image-uplaoder');
-  wp_enqueue_script( 'devo-image-uploader' );
-}
 
 function madefree_settings_template_callback()
 {
@@ -108,7 +102,7 @@ function madefree_settings_init(){
         'madefree-settings-page'
     );
       
-        // Registe bg color
+        // Register bg color
         register_setting(
           'madefree-settings-page',
           'madefree_settings_bg_color_field',
@@ -128,7 +122,7 @@ function madefree_settings_init(){
         'madefree_settings_section'
       );
 
-      // Registe btn size input
+      // Register btn size input
       register_setting(
           'madefree-settings-page',
           'madefree_settings_btn_size_field',
@@ -138,6 +132,25 @@ function madefree_settings_init(){
               'default' => 'btn-small'
           )
       );
+
+      // Register text font type input
+      register_setting(
+        'madefree-settings-page',
+        'madefree_settings_txt_font_field',
+        array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => 'btn-small'
+        )
+    );
+        // Add text font type
+          add_settings_field(
+            'madefree_settings_btn_size_field',
+            __( 'Choose font type', 'madefree' ),
+            'madefree_settings_txt_font_callback',
+            'madefree-settings-page',
+            'madefree_settings_section'
+          );
 
       // btn color
       add_settings_field(
@@ -206,10 +219,41 @@ function madefree_settings_init(){
       'madefree_settings_section'
     );
 
+      // Register image uploader field
+      register_setting(
+        'madefree-settings-page',
+        'madefree_settings_image_uploader_field',
+        array(
+            'type' => 'integer',
+            'sanitize_callback' => 'sanitize_image_uploader',
+            'default' => ''
+        )
+    );
+
+    // Add radio fields
+    add_settings_field(
+        'madefree_settings_image_uploader_field',
+        __( 'Image Uplaoder', 'madefree' ),
+        'madefree_settings_image_uploader_field_callback',
+        'madefree-settings-page',
+        'madefree_settings_section'
+    );
+
 
 }
 
 add_action( 'admin_init', 'madefree_settings_init' );
+
+/**
+ * Sanitize Image Uploader
+ */
+function sanitize_image_uploader( $value ) {
+  if(isset($value)) {
+      return intval($value);
+  }else {
+      return false;
+  }
+}
 
 function madefree_settings_btn_color_callback(){
   $madefree_btn_color = get_option('madefree_settings_btn_color_field');
@@ -222,6 +266,16 @@ function madefree_settings_btn_size_callback() {
   $madefree_btn_size = get_option('madefree_settings_btn_size_field');
   ?>
   <select name="madefree_settings_btn_size_field" class="regular-text">
+        <option value="btn-small" <?php selected( 'btn-small', $madefree_btn_size ); ?> >Small</option>
+        <option value="btn-mid" <?php selected( 'btn-mid', $madefree_btn_size ); ?> >Medium</option>
+        <option value="btn-larg" <?php selected( 'btn-larg', $madefree_btn_size ); ?>>Large</option>
+  </select>
+  <?php 
+}
+function madefree_settings_txt_font_callback() {
+  $madefree_btn_size = get_option('madefree_settings_txt_font_field');
+  ?>
+  <select name="madefree_settings_txt_font_field" class="regular-text">
         <option value="btn-small" <?php selected( 'btn-small', $madefree_btn_size ); ?> >Small</option>
         <option value="btn-mid" <?php selected( 'btn-mid', $madefree_btn_size ); ?> >Medium</option>
         <option value="btn-larg" <?php selected( 'btn-larg', $madefree_btn_size ); ?>>Large</option>
@@ -251,6 +305,19 @@ function madefree_settings_redirect_callback(){
   ?>
   <input type="text" name="madefree_settings_redirect_field"  value="<?php echo isset($madefree_redirect) ? esc_attr( $madefree_redirect ) : ''; ?>" />
 
+  <?php 
+}
+
+function madefree_settings_image_uploader_field_callback() {
+
+  $madefree_image_id = get_option('madefree_settings_image_uploader_field');
+
+  ?>
+  
+      <img data-src="" src="<?php echo esc_url(wp_get_attachment_url(isset($madefree_image_id) ? (int) $madefree_image_id : 0)); ?>" width="250" />
+      
+          <input type="file" name="madefree_settings_image_uploader_field" value="<?php echo esc_attr(isset($madefree_image_id) ? (int) $madefree_image_id : 0); ?>" />
+        
   <?php 
 }
 
