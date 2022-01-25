@@ -35,8 +35,7 @@ defined('ABSPATH') or die("The plugin is not working.");
 
 function made_free()
 {
-
-  include_once plugin_dir_path(__FILE__) .'./includes/contact.php';
+    include_once plugin_dir_path(__FILE__) .'./includes/contact.php';
 }
 
 // add shortcut 
@@ -53,10 +52,21 @@ function madefree_setting_menu()
       'madefree_settings_template_callback',
       '',
       null
+
     );
 
+    add_action( 'admin_head-'.$hook, 'devo_image_uplaoder_assets', 10, 1 );
+
 }
+
 add_action('admin_menu', 'madefree_setting_menu');
+
+function myplugin_image_uplaoder_assets() {
+  wp_enqueue_media();
+  wp_enqueue_style( 'devo-image-uplaoder');
+  wp_enqueue_script( 'devo-image-uploader' );
+}
+
 function madefree_settings_template_callback()
 {
   ?>
@@ -75,85 +85,130 @@ function madefree_settings_template_callback()
               submit_button( 'Save Settings' );
           ?>
       </form>
-  </div
-<?php
+  </div>
+  <?php 
+
 }
 
 // Setting template
 
 function madefree_settings_init(){
-  // Setup settings section
-  add_settings_section(
-    'madefree_settings_section',
-    'MadeFree Settings Page',
-    '',
-    'madefree-settings-page'
-);
-  add_settings_section(
-  'madefree_settings_section',
-  'M_cont_fo',
-  '',
-  'madefree-settings-page'
-);
-// Register bg color
-register_setting(
-  'madefree-settings-page',
-  'madefree_settings_bg_color_field',
-  array(
-      'type' => 'string',
-      'sanitize_callback' => 'sanitize_text_field',
-      'default' => '#FFFFFF'
-  )
-);
+        // Setup settings section
+        add_settings_section(
+          'madefree_settings_section',
+          'MadeFree Settings Page',
+          '',
+          'madefree-settings-page'
+      );
 
-// backgroung color
-add_settings_field(
-'madefree_settings_bg_color_field',
-__( 'Backgroung Color', 'madefree' ),
-'madefree_settings_bg_color_callback',
-'madefree-settings-page',
-'madefree_settings_section'
-);
-// Register btn size input
-register_setting(
-  'madefree-settings-page',
-  'madefree_settings_btn_size_field',
-  array(
-      'type' => 'string',
-      'sanitize_callback' => 'sanitize_text_field',
-      'default' => 'btn-small'
-  )
-);
-// btn color
-add_settings_field(
-  'madefree_settings_btn_color_field',
-  __( 'Submit button Color', 'madefree' ),
-  'madefree_settings_btn_color_callback',
-  'madefree-settings-page',
-  'madefree_settings_section'
-);
+      add_settings_section(
+        'madefree_settings_section',
+        'Take this short code to diplay it in your content: M_cont_fo',
+        '',
+        'madefree-settings-page'
+    );
+      
+        // Registe bg color
+        register_setting(
+          'madefree-settings-page',
+          'madefree_settings_bg_color_field',
+          array(
+              'type' => 'string',
+              'sanitize_callback' => 'sanitize_text_field',
+              'default' => '#FFFFFF'
+          )
+      );
 
-// Registe btn color input
-register_setting(
-    'madefree-settings-page',
-    'madefree_settings_btn_color_field',
-    array(
-        'type' => 'string',
-        'sanitize_callback' => 'sanitize_text_field',
-        'default' => '#2271b1'
-    )
-);
- // backgroung color
- add_settings_field(
-  'madefree_settings_redirect_field',
-  __( 'Redirect URL', 'madefree' ),
-  'madefree_settings_redirect_callback',
-  'madefree-settings-page',
-  'madefree_settings_section'
-);
+      // backgroung color
+      add_settings_field(
+        'madefree_settings_bg_color_field',
+        __( 'Backgroung Color', 'madefree' ),
+        'madefree_settings_bg_color_callback',
+        'madefree-settings-page',
+        'madefree_settings_section'
+      );
+
+      // Registe btn size input
+      register_setting(
+          'madefree-settings-page',
+          'madefree_settings_btn_size_field',
+          array(
+              'type' => 'string',
+              'sanitize_callback' => 'sanitize_text_field',
+              'default' => 'btn-small'
+          )
+      );
+
+      // btn color
+      add_settings_field(
+        'madefree_settings_btn_color_field',
+        __( 'Submit button Color', 'madefree' ),
+        'madefree_settings_btn_color_callback',
+        'madefree-settings-page',
+        'madefree_settings_section'
+      );
+
+      // Register btn color input
+      register_setting(
+          'madefree-settings-page',
+          'madefree_settings_btn_color_field',
+          array(
+              'type' => 'string',
+              'sanitize_callback' => 'sanitize_text_field',
+              'default' => '#2271b1'
+          )
+      );
+      // btn text color
+      add_settings_field(
+        'madefree_settings_btn_txt_color_field',
+        __( 'Button text color', 'madefree' ),
+        'madefree_settings_btn_txt_color_callback',
+        'madefree-settings-page',
+        'madefree_settings_section'
+      );
+
+      // Register btn text color
+      register_setting(
+          'madefree-settings-page',
+          'madefree_settings_btn_txt_color_field',
+          array(
+              'type' => 'string',
+              'sanitize_callback' => 'sanitize_text_field',
+              'default' => 'black'
+          )
+      );
+      // Add btn size input
+      add_settings_field(
+        'madefree_settings_btn_size_field',
+        __( 'Submit button size', 'madefree' ),
+        'madefree_settings_btn_size_callback',
+        'madefree-settings-page',
+        'madefree_settings_section'
+      );
+
+      // redirect url
+    register_setting(
+        'madefree-settings-page',
+        'madefree_settings_redirect_field',
+        array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '#'
+        )
+    );
+
+    // backgroung color
+    add_settings_field(
+      'madefree_settings_redirect_field',
+      __( 'Redirect URL', 'madefree' ),
+      'madefree_settings_redirect_callback',
+      'madefree-settings-page',
+      'madefree_settings_section'
+    );
 
 
 }
+
 add_action( 'admin_init', 'madefree_settings_init' );
 
 function madefree_settings_btn_color_callback(){
@@ -173,10 +228,19 @@ function madefree_settings_btn_size_callback() {
   </select>
   <?php 
 }
+
 function madefree_settings_bg_color_callback(){
   $madefree_bg_color = get_option('madefree_settings_bg_color_field');
   ?>
   <input type="color" name="madefree_settings_bg_color_field"  value="<?php echo isset($madefree_bg_color) ? esc_attr( $madefree_bg_color ) : ''; ?>" />
+  <br>
+  <hr>
+  <?php 
+}
+function madefree_settings_btn_txt_color_callback(){
+  $madefree_btn_txt_color = get_option('madefree_settings_btn_txt_color_field');
+  ?>
+  <input type="color" name="madefree_settings_btn_txt_color_field"  value="<?php echo isset($madefree_btn_txt_color) ? esc_attr( $madefree_btn_txt_color ) : ''; ?>" />
   <br>
   <hr>
   <?php 
@@ -189,6 +253,42 @@ function madefree_settings_redirect_callback(){
 
   <?php 
 }
+
+
+// Enqueue style 
+function enqueue() {
+
+    wp_enqueue_style( 'myCSS', plugin_dir_url(__FILE__) .'assets/css/style1.css');
+    wp_enqueue_script( 'my_custom_script', plugin_dir_url( __FILE__ ) . 'assets/js/script.js' );
+
+}
+add_action( 'wp_enqueue_scripts', 'enqueue' );
+
+
+function example_form_capture(){
+
+  if(isset($_POST['example_form_submit']))
+  {
+    $Fname= sanitize_text_field($_POST['your_Fname']);
+    $Lname= sanitize_text_field($_POST['your_Lname']);
+    $email= sanitize_text_field($_POST['your_email']);
+    $comments= sanitize_textarea_field($_POST['your_comments']);
+
+    $to='it.kevin.shitaye@gmail.com';
+    $subject='Test form submission';
+    $message='' .$Fname.' - ' .$Lname.' -  '.$email.' - '.$comments;
+    wp_mail($to,$subject,$message);
+  }
+}
+add_action('wp_head','example_form_capture');
+
+
+
+
+
+
+
+
 
 
 
