@@ -281,6 +281,10 @@ function madefree_settings_txt_font_callback() {
         <option value="Brush Script MT, Brush Script Std, cursive" <?php selected( 'Brush Script MT, Brush Script Std, cursive', $madefree_txt_font ); ?> >Cursive</option>
         <option value="garamond,serif" <?php selected( 'garamond,serif', $madefree_txt_font ); ?> >Garamond,Serif</option>
         <option value="Roboto" <?php selected( 'Roboto', $madefree_txt_font ); ?>>Roboto</option>
+        <option value="Trattatello, fantasy" <?php selected( 'Trattatello, fantasy', $madefree_txt_font ); ?>>Trattatello</option>
+        <option value="Didot, serif" <?php selected( 'Didot, serif', $madefree_txt_font ); ?>>Didot</option>
+        <option value="Times, serif" <?php selected( 'Times, serif', $madefree_txt_font ); ?>>Times</option>
+        <option value="Andale Mono, monospace" <?php selected( 'Andale Mono, monospace', $madefree_txt_font ); ?>>Andale Mono</option>
   </select>
   <?php 
 }

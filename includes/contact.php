@@ -41,7 +41,7 @@
                 <input type="text" class="field" name="your_email" placeholder="Your email"/>
 				<label class="label"  for="your_comments">Comments</label>
                 <textarea placeholder="Message"  name="your_comments" class="form-control"></textarea>
-				<input style=" color: <?php echo isset($madefree_btn_txt_color) ? esc_attr( $madefree_btn_txt_color ) : ''; ?>; background-color: <?php echo isset($madefree_btn_color) ? esc_attr( $madefree_btn_color ) : ''; ?>;" class="btn <?php echo isset($madefree_btn_size) ? esc_attr( $madefree_btn_size ) : ''; ?>" type="submit" value="Send your information" name="example_form_submit" />
+				<input style=" color: <?php echo isset($madefree_btn_txt_color) ? esc_attr( $madefree_btn_txt_color ) : ''; ?>; background-color: <?php echo isset($madefree_btn_color) ? esc_attr( $madefree_btn_color ) : ''; ?>;" class="btn <?php echo isset($madefree_btn_size) ? esc_attr( $madefree_btn_size ) : ''; ?>" type="submit" value="Send" name="example_form_submit" />
                 </form>
 			</div>
 		</div>
