@@ -14,6 +14,8 @@
 			// button size 
 			$madefree_btn_size = get_option('madefree_settings_btn_size_field'); 
 			// button color
+			$madefree_txt_font = get_option('madefree_settings_txt_font_field'); 
+			// font type
 			$madefree_btn_color = get_option('madefree_settings_btn_color_field');
 			// button txt color
 			$madefree_btn_txt_color = get_option('madefree_settings_btn_txt_color_field');
@@ -25,7 +27,7 @@
 	</div>
    
 	<div class="container" >
-		<div class="contact-box" >
+		<div class="contact-box" style="font-family: <?php echo isset($madefree_txt_font) ? esc_attr( $madefree_txt_font ) : ''; ?> !important; " >
 			<div class="left"></div>
 			<div class="right" style="background-color: <?php echo isset($madefree_bg_color) ? esc_attr( $madefree_bg_color ) : ''; ?>;">
 				

@@ -140,13 +140,13 @@ function madefree_settings_init(){
         array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
-            'default' => 'btn-small'
+            'default' => 'garamond,serif'
         )
     );
         // Add text font type
           add_settings_field(
-            'madefree_settings_btn_size_field',
-            __( 'Choose font type', 'madefree' ),
+            'madefree_settings_txt_font_field',
+            __( 'Choose Font type', 'madefree' ),
             'madefree_settings_txt_font_callback',
             'madefree-settings-page',
             'madefree_settings_section'
@@ -270,15 +270,17 @@ function madefree_settings_btn_size_callback() {
         <option value="btn-mid" <?php selected( 'btn-mid', $madefree_btn_size ); ?> >Medium</option>
         <option value="btn-larg" <?php selected( 'btn-larg', $madefree_btn_size ); ?>>Large</option>
   </select>
+  <hr>
+  <br><br>
   <?php 
 }
 function madefree_settings_txt_font_callback() {
-  $madefree_btn_size = get_option('madefree_settings_txt_font_field');
+  $madefree_txt_font = get_option('madefree_settings_txt_font_field');
   ?>
   <select name="madefree_settings_txt_font_field" class="regular-text">
-        <option value="btn-small" <?php selected( 'btn-small', $madefree_btn_size ); ?> >Small</option>
-        <option value="btn-mid" <?php selected( 'btn-mid', $madefree_btn_size ); ?> >Medium</option>
-        <option value="btn-larg" <?php selected( 'btn-larg', $madefree_btn_size ); ?>>Large</option>
+        <option value="Brush Script MT, Brush Script Std, cursive" <?php selected( 'Brush Script MT, Brush Script Std, cursive', $madefree_txt_font ); ?> >Cursive</option>
+        <option value="garamond,serif" <?php selected( 'garamond,serif', $madefree_txt_font ); ?> >Garamond,Serif</option>
+        <option value="Roboto" <?php selected( 'Roboto', $madefree_txt_font ); ?>>Roboto</option>
   </select>
   <?php 
 }
@@ -287,16 +289,13 @@ function madefree_settings_bg_color_callback(){
   $madefree_bg_color = get_option('madefree_settings_bg_color_field');
   ?>
   <input type="color" name="madefree_settings_bg_color_field"  value="<?php echo isset($madefree_bg_color) ? esc_attr( $madefree_bg_color ) : ''; ?>" />
-  <br>
-  <hr>
   <?php 
 }
 function madefree_settings_btn_txt_color_callback(){
   $madefree_btn_txt_color = get_option('madefree_settings_btn_txt_color_field');
   ?>
   <input type="color" name="madefree_settings_btn_txt_color_field"  value="<?php echo isset($madefree_btn_txt_color) ? esc_attr( $madefree_btn_txt_color ) : ''; ?>" />
-  <br>
-  <hr>
+  
   <?php 
 }
 
