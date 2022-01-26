@@ -21,6 +21,8 @@
 			$madefree_btn_txt_color = get_option('madefree_settings_btn_txt_color_field');
 			// redirect url
 			$madefree_redirect = get_option('madefree_settings_redirect_field');
+			// image url
+			$madefree_image = get_option('madefree_settings_image_field');
 		
 		?>
 		
@@ -28,7 +30,7 @@
    
 	<div class="container" >
 		<div class="contact-box" style="font-family: <?php echo isset($madefree_txt_font) ? esc_attr( $madefree_txt_font ) : ''; ?> !important; " >
-			<div class="left"></div>
+			<div class="left" style="background: url('<?php echo isset($madefree_image) ? esc_attr( $madefree_image ) : ''; ?> !important;') no-repeat center;background-size:cover;height:100%;" ></div>
 			<div class="right" style="background-color: <?php echo isset($madefree_bg_color) ? esc_attr( $madefree_bg_color ) : ''; ?>;">
 				
 				<h2>Contact Us</h2>

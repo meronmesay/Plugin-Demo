@@ -210,7 +210,7 @@ function madefree_settings_init(){
         )
     );
 
-    // backgroung color
+    // redirect url
     add_settings_field(
       'madefree_settings_redirect_field',
       __( 'Redirect URL', 'madefree' ),
@@ -218,27 +218,25 @@ function madefree_settings_init(){
       'madefree-settings-page',
       'madefree_settings_section'
     );
+     // image link
+     register_setting(
+      'madefree-settings-page',
+      'madefree_settings_image_field',
+      array(
+          'type' => 'string',
+          'sanitize_callback' => 'sanitize_text_field',
+          'default' => 'https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YmFja2dyb3VuZCUyMGltYWdlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
+      )
+  );
 
-      // Register image uploader field
-      register_setting(
-        'madefree-settings-page',
-        'madefree_settings_image_uploader_field',
-        array(
-            'type' => 'integer',
-            'sanitize_callback' => 'sanitize_image_uploader',
-            'default' => ''
-        )
-    );
-
-    // Add radio fields
-    add_settings_field(
-        'madefree_settings_image_uploader_field',
-        __( 'Image Uplaoder', 'madefree' ),
-        'madefree_settings_image_uploader_field_callback',
-        'madefree-settings-page',
-        'madefree_settings_section'
-    );
-
+  // image link
+  add_settings_field(
+    'madefree_settings_image_field',
+    __( 'Change Image', 'madefree' ),
+    'madefree_settings_image_callback',
+    'madefree-settings-page',
+    'madefree_settings_section'
+  );
 
 }
 
@@ -286,8 +284,12 @@ function madefree_settings_txt_font_callback() {
         <option value="Times, serif" <?php selected( 'Times, serif', $madefree_txt_font ); ?>>Times</option>
         <option value="Andale Mono, monospace" <?php selected( 'Andale Mono, monospace', $madefree_txt_font ); ?>>Andale Mono</option>
   </select>
+  <hr>
+  <br><br>
   <?php 
+  
 }
+
 
 function madefree_settings_bg_color_callback(){
   $madefree_bg_color = get_option('madefree_settings_bg_color_field');
@@ -310,17 +312,11 @@ function madefree_settings_redirect_callback(){
 
   <?php 
 }
-
-function madefree_settings_image_uploader_field_callback() {
-
-  $madefree_image_id = get_option('madefree_settings_image_uploader_field');
-
+function madefree_settings_image_callback(){
+  $madefree_image = get_option('madefree_settings_image_field');
   ?>
-  
-      <img data-src="" src="<?php echo esc_url(wp_get_attachment_url(isset($madefree_image_id) ? (int) $madefree_image_id : 0)); ?>" width="250" />
-      
-          <input type="file" name="madefree_settings_image_uploader_field" value="<?php echo esc_attr(isset($madefree_image_id) ? (int) $madefree_image_id : 0); ?>" />
-        
+  <input type="text" name="madefree_settings_image_field"  value="<?php echo isset($madefree_image) ? esc_attr( $madefree_image ) : ''; ?>" />
+
   <?php 
 }
 
